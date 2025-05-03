@@ -17,7 +17,7 @@ import (
 type blog struct {
 	Author  string `json:"author"`
 	Title   string `json:"title"`
-	Content []byte `json:"content"`
+	Content string `json:"content"`
 }
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
@@ -37,9 +37,10 @@ func addBlog(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		fmt.Println("ERROR=> ", err)
+		return
 	}
 	fmt.Println("URL: ", r.URL)
-	fmt.Println("Body: ", r.Body)
+	fmt.Println("Body: ", Blog.Title)
 	w.WriteHeader(http.StatusOK)
 	w.Write([]byte("Blog Added Successfully!"))
 }
